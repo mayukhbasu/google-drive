@@ -1,12 +1,23 @@
-import express, {Request, Response} from "express";
+import * as dotenv from 'dotenv';
+dotenv.config();
+
+
+import express from 'express';
+import authRoutes from './routes/authRoutes';
+
 
 const app = express();
-const port = 3000;
+const PORT = process.env.PORT || 3000;
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('Hello, world!');
-});
 
-app.listen(port, () => {
-  console.log(`Server is running at http://localhost:${port}`);
+
+// Middlewares for parsing request bodies here
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Use the authRoutes with the /auth prefix
+app.use('/auth', authRoutes);
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
