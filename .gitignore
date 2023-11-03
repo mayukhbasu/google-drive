@@ -1,5 +1,6 @@
 # Node modules
 /drive-server/node_modules/
+/drive-server/dist/
 
 # Other files and folders to ignore
 .DS_Store
