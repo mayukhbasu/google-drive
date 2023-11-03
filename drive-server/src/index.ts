@@ -3,12 +3,15 @@ dotenv.config();
 
 
 import express from 'express';
+import cookieParser from 'cookie-parser';
+
 import authRoutes from './routes/authRoutes';
 import homeRoutes from './routes/homeRoutes';
 
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+app.use(cookieParser());
+const PORT = process.env.PORT || 5000;
 
 
 
