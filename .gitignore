@@ -1,1 +1,6 @@
-/drive-server/node_modules
+# Node modules
+/drive-server/node_modules/
+
+# Other files and folders to ignore
+.DS_Store
+*.log
