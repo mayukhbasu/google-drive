@@ -4,6 +4,7 @@ dotenv.config();
 
 import express from 'express';
 import authRoutes from './routes/authRoutes';
+import homeRoutes from './routes/homeRoutes';
 
 
 const app = express();
@@ -17,6 +18,8 @@ app.use(express.urlencoded({ extended: true }));
 
 // Use the authRoutes with the /auth prefix
 app.use('/auth', authRoutes);
+
+app.use('/', homeRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

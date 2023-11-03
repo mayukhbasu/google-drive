@@ -13,11 +13,11 @@ export class AuthController {
     res.redirect(url);
   }
 
-  public async getGoogleAccountFromCode(req: Request, res: Response): Promise<Response> {
+  public async getGoogleAccountFromCode(req: Request, res: Response) {
     try {
       const {code} = req.query;
       const data = await this.authService.getTokensFromCode(code as string);
-      return res.status(200).json(data);
+      res.redirect('/home'); 
     } catch(error) {
       return res.status(500).json({ message: 'Error retrieving the Google account'});
     }

@@ -1,4 +1,6 @@
 import { OAuth2Client } from 'google-auth-library';
+import jwt from 'jsonwebtoken';
+
 
 export class AuthService {
   private oauth2Client;
@@ -14,7 +16,14 @@ export class AuthService {
       clientSecret,
       redirectUri
     );
-    console.log("hello world")
+  }
+
+  public generateToken(user: any): string {
+    const token = jwt.sign(user, process.env.JWT_SECRET!, {
+      expiresIn: '24h', // token will expire in 24 hours
+    });
+
+    return token;
   }
 
   public createAuthUrl(): string {
