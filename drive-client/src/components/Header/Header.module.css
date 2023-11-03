@@ -1,0 +1,87 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f8f9fa;
+  padding: 0 16px;
+  box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.302), 0 2px 6px 2px rgba(60, 64, 67, 0.149);
+}
+
+.header .logo {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.header .logo img {
+  height: 40px;
+}
+
+.header .logo h1 {
+  margin-left: 10px;
+  font-size: 24px;
+  color: #5f6368;
+}
+
+.header .searchBar {
+  flex-grow: 1;
+  margin-left: 24px;
+}
+
+.header .searchBar input {
+  width: 90%; /* Adjusted width */
+  padding: 8px 12px; /* Reduced padding */
+  border: 1px solid #dfe1e5;
+  border-radius: 8px;
+  font-size: 16px;
+  outline: none;
+}
+
+.header .searchBar input:focus {
+  box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
+  border-color: rgba(223, 225, 229, 0);
+}
+
+.header .userInfo {
+  display: flex;
+  align-items: center;
+  margin-left: 24px;
+}
+
+.header .userInfo span {
+  margin-right: 12px;
+  color: #202124;
+  font-weight: 500;
+}
+
+.header .userInfo button {
+  padding: 8px 16px;
+  border: none;
+  background-color: #1a73e8;
+  color: white;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  outline: none;
+  user-select: none;
+  transition: background-color 0.3s;
+}
+
+.header .userInfo button:hover {
+  background-color: #185abc;
+}
+
+@media (max-width: 768px) {
+  .header .searchBar {
+    margin-left: 12px;
+  }
+
+  .header .searchBar input {
+    width: 100%; /* Adjusted width for mobile */
+    padding: 4px 8px; /* Reduced padding for mobile */
+  }
+
+  .header .userInfo {
+    margin-left: 12px;
+  }
+}

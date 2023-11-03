@@ -2,8 +2,8 @@
 
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import LoginPage from './containers/LoginPage';
-import HomePage from './containers/HomePage';
+import LoginPage from './containers/LoginPage/LoginPage';
+import HomePage from './containers/HomePage/HomePage';
 
 const App = () => {
   return (
