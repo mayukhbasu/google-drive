@@ -19,7 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 // Use the authRoutes with the /auth prefix
 app.use('/auth', authRoutes);
 
-app.use('/', homeRoutes);
+app.use('/home', homeRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

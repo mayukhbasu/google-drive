@@ -17,6 +17,9 @@ export class AuthController {
     try {
       const {code} = req.query;
       const data = await this.authService.getTokensFromCode(code as string);
+      const user = {email: data.email};
+      const token = this.authService.generateToken(user);
+      res.cookie('jwt', token, { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
       res.redirect('/home'); 
     } catch(error) {
       return res.status(500).json({ message: 'Error retrieving the Google account'});
