@@ -12,7 +12,17 @@ const UserInfo: React.FC = () => {
 
   useEffect(() => {
     dispatch(fetchUserInfo() as any)
-  }, [dispatch])
+  }, [dispatch]);
+
+  if (loading) {
+    return <div>Loading your information...</div>;
+  }
+  
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
+
   return (
     <div>
     {userInfo && (
