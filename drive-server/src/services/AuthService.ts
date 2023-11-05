@@ -37,6 +37,7 @@ export class AuthService {
       code,
       redirect_uri: process.env.CALLBACK_URL
     });
+    console.log(tokens);
     this.oauth2Client.setCredentials(tokens);
     return tokens;
   }
