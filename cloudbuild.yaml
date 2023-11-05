@@ -1,7 +1,12 @@
-- name: 'gcr.io/cloud-builders/npm'
-  args: ['install']
-  id: 'npm_install'
+steps:
+  # Install npm dependencies
+  - name: 'gcr.io/cloud-builders/npm'
+    args: ['install']
+    id: 'npm_install'
 
-- name: 'ubuntu'
-  args: ['ls', '-la', 'node_modules/googleapis']
-  id: 'list_googleapis'
+  # Debug: List googleapis directory contents
+  - name: 'ubuntu'
+    args: ['ls', '-la', 'node_modules/googleapis']
+    id: 'list_googleapis'
+
+  # Continue with other steps...
