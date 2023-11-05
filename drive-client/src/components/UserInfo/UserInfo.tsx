@@ -1,14 +1,13 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { UserInfoState } from '../../types/UserTypes';
 import { useDispatch } from 'react-redux';
 import { fetchUserInfo } from '../../actions/userActions';
 
 import './UserInfo.css';
+import { RootState } from '../../reducers';
 
 const UserInfo: React.FC = () => {
-  const {loading,userInfo, error} = useSelector((state: UserInfoState) => state);
-  console.log(userInfo)
+  const {loading,userInfo, error} = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
 
   useEffect(() => {

@@ -4,10 +4,9 @@ import UserInfo from '../UserInfo/UserInfo';
 
 interface HeaderProps {
   onLogout: () => void;
-  userName: string;
 }
 
-const Header: React.FC<HeaderProps> = ({ onLogout, userName }) => {
+const Header: React.FC<HeaderProps> = ({ onLogout }) => {
   return (
     <header className={styles.header}>
       <div className={styles.logo}>
@@ -23,7 +22,6 @@ const Header: React.FC<HeaderProps> = ({ onLogout, userName }) => {
         <UserInfo/>
       </div>
       <div className={styles.userInfo}>
-        <span>{userName}</span>
         <button onClick={onLogout}>Logout</button>
       </div>
     </header>
