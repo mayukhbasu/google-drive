@@ -1,15 +1,48 @@
 steps:
-  # Install npm dependencies in the 'drive-server' directory
+  # Step 1: Install dependencies and build the TypeScript project
   - name: 'gcr.io/cloud-builders/npm'
     args: ['install']
     dir: 'drive-server'
-    id: 'npm_install'
 
-  # Debug: List 'drive-server/node_modules/googleapis' directory contents
-  
-
-  # Build the project in the 'drive-server' directory
   - name: 'gcr.io/cloud-builders/npm'
     args: ['run', 'build']
     dir: 'drive-server'
-    id: 'npm_build'
+
+  # Step 2: Build the Docker image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/eminent-bond-404002/drive-server:$SHORT_SHA', '.']
+    dir: 'drive-server'
+
+  # Step 3: Push the Docker image to Google Container Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/eminent-bond-404002/drive-server:$SHORT_SHA']
+
+  # Step 4: Deploy the Docker image to Google Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'gcloud'
+    args:
+      - 'run'
+      - 'deploy'
+      - 'drive-server-service'
+      - '--image'
+      - 'gcr.io/eminent-bond-404002/drive-server:$SHORT_SHA'
+      - '--platform'
+      - 'managed'
+      - '--region'
+      - 'us-central1'
+      - '--allow-unauthenticated'
+
+# Images to be stored in Container Registry
+images:
+  - 'gcr.io/eminent-bond-404002/drive-server:$SHORT_SHA'
+
+# Set the ID of the Cloud Build project
+options:
+  substitutionOption: 'ALLOW_LOOSE'
+
+# Define substitutions
+substitutions:
+  _GCP_PROJECT_ID: 'eminent-bond-404002'
+
+# Define timeout
+timeout: '1200s' # Timeout after 20 minutes
