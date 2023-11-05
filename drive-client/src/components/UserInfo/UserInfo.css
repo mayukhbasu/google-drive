@@ -1,0 +1,12 @@
+.welcome-container {
+  max-width: 600px; /* Maximum width of the welcome container */
+  margin: 30px auto; /* Center the container with automatic margins */
+  padding: 20px; /* Padding inside the container */
+  background-color: #ffffff; /* White background color */
+  border-left: 4px solid #5b9bd5; /* A blue accent border on the left */
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+}
+.username {
+  font-weight: 600; /* Bold weight for the username for emphasis */
+  color: #5b9bd5; /* Color that matches the border for consistency */
+}

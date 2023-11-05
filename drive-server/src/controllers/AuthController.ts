@@ -41,7 +41,7 @@ export class AuthController {
   }
 
   public async getUserInfo(req: Request, res: Response): Promise<any> {
-    res.json({ user: req.user });
+    res.json({name: req.user.name, email: req.user.email});
     // try {
     //   const accessToken = req.cookies['access_token'];
     //   if (!accessToken) {

@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './Header.module.css';
+import UserInfo from '../UserInfo/UserInfo';
 
 interface HeaderProps {
   onLogout: () => void;
@@ -19,7 +20,7 @@ const Header: React.FC<HeaderProps> = ({ onLogout, userName }) => {
         <input type="text" placeholder="Search in Drive" />
       </div>
       <div className='userInfo'>
-        profile details
+        <UserInfo/>
       </div>
       <div className={styles.userInfo}>
         <span>{userName}</span>
