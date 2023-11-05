@@ -1,12 +1,18 @@
 steps:
-  # Install npm dependencies
+  # Install npm dependencies in the 'drive-server' directory
   - name: 'gcr.io/cloud-builders/npm'
     args: ['install']
+    dir: 'drive-server'
     id: 'npm_install'
 
-  # Debug: List googleapis directory contents
+  # Debug: List 'drive-server/node_modules/googleapis' directory contents
   - name: 'ubuntu'
     args: ['ls', '-la', 'node_modules/googleapis']
+    dir: 'drive-server'
     id: 'list_googleapis'
 
-  # Continue with other steps...
+  # Build the project in the 'drive-server' directory
+  - name: 'gcr.io/cloud-builders/npm'
+    args: ['run', 'build']
+    dir: 'drive-server'
+    id: 'npm_build'
