@@ -6,10 +6,7 @@ steps:
     id: 'npm_install'
 
   # Debug: List 'drive-server/node_modules/googleapis' directory contents
-  - name: 'ubuntu'
-    args: ['ls', '-la', 'node_modules/googleapis']
-    dir: 'drive-server'
-    id: 'list_googleapis'
+  
 
   # Build the project in the 'drive-server' directory
   - name: 'gcr.io/cloud-builders/npm'
