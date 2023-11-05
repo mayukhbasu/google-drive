@@ -42,16 +42,10 @@ export class AuthController {
 
   public async getUserInfo(req: Request, res: Response): Promise<any> {
     res.json({name: req.user.name, email: req.user.email});
-    // try {
-    //   const accessToken = req.cookies['access_token'];
-    //   if (!accessToken) {
-    //     return res.status(401).json({ message: 'No access token provided' });
-    //   }
-    //   const userInfo = await this.authService.getUserInfo(accessToken);
-    //   res.json(userInfo);
-    // }catch(err) {
-    //   console.error('Error getting user info:', err);
-    //   res.status(500).json({ message: 'Error retrieving user info' });
-    // }
+  }
+
+  public async logout(req: Request, res: Response): Promise<any> {
+    res.clearCookie('access_token');
+    return res.status(200).json({ message: 'Logged out successfully' });
   }
 }
