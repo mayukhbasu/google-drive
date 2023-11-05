@@ -1,6 +1,13 @@
 steps:
   # Debug: List contents of the 'drive-server' directory
   - name: 'ubuntu'
-    dir: 'drive-server'
-    args: ['ls', '-la']
+    args: ['bash', '-c', 'ls -la drive-server/']
 
+  # Build the server image from the Dockerfile in the 'drive-server' directory
+  - name: 'gcr.io/cloud-builders/docker'
+    dir: 'drive-server'
+    args: ['build', '-t', 'gcr.io/eminent-bond-404002/drive-server:$SHORT_SHA', '.']
+    # ... rest of your steps
+
+# Set timeout to "1600s" if you expect builds to take longer.
+timeout: "1600s"
