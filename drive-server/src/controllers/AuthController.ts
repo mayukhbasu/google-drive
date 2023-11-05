@@ -23,7 +23,7 @@ export class AuthController {
       // Assuming getUserInfo returns an object with an email property
       if (userInfo && userInfo.email) {
         const user = { email: userInfo.email };
-        const token = this.authService.generateToken(user);
+        //const token = this.authService.generateToken(user);
         res.cookie('access_token', tokens.access_token, {
           httpOnly: true,
           secure: process.env.NODE_ENV === 'production', // use secure cookies in production
