@@ -1,5 +1,21 @@
 steps:
+# Build the client image
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'gcr.io/eminent-bond-404002/drive-server:$SHORT_SHA', '.']
+  args: ['build', '-t', 'gcr.io/eminent-bond-404002/drive-server:$SHORT_SHA', './drive-server']
+
+# Push the server image
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'gcr.io/eminent-bond-404002/drive-server:$SHORT_SHA']
+
+# Here you can add additional steps for testing or other build steps for drive-server
+# ...
+
+# Deployment to Google Cloud Run (if applicable)
 - name: 'gcr.io/cloud-builders/gcloud'
-  args: ['run', 'deploy', 'drive-service', '--image', 'gcr.io/eminent-bond-404002/drive-server:$SHORT_SHA', '--platform', 'managed', '--region', 'us-central1']
+  args: ['run', 'deploy', 'drive-server-service', '--image', 'gcr.io/eminent-bond-404002/drive-server:$SHORT_SHA', '--platform', 'managed', '--region', 'us-central1']
+
+# You can also add steps to deploy the server application if needed
+# ...
+
+images:
+- 'gcr.io/eminent-bond-404002/drive-server:$SHORT_SHA'
