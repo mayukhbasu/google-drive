@@ -1,20 +1,20 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
+import { AuthService } from '../services/AuthService';
 
 interface JwtPayload {
   email: string;
 }
 
-export const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
+export const authMiddleware = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const token = req.cookies['jwt']; 
-
-    if (!token) {
-      return res.status(401).json({ message: 'No token provided.' });
-    }
-
-    const decoded = jwt.verify(token, process.env.JWT_SECRET as string) as JwtPayload;
-    req.user = decoded; // Make sure you extend the Request type to include `user`
+      const accessToken = req.cookies['access_token'];
+      if (!accessToken) {
+        return res.status(401).json({ message: 'No access token provided' });
+      }
+      const authService = new AuthService();
+      const userInfo = await authService.getUserInfo(accessToken);
+      req.user = userInfo;
     next();
   } catch (err) {
     res.status(403).json({ message: 'Failed to authenticate token.' });

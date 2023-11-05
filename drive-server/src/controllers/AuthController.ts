@@ -24,7 +24,11 @@ export class AuthController {
       if (userInfo && userInfo.email) {
         const user = { email: userInfo.email };
         const token = this.authService.generateToken(user);
-        res.cookie('jwt', token, { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
+        res.cookie('access_token', tokens.access_token, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === 'production', // use secure cookies in production
+          maxAge: tokens.expiry_date - Date.now(), // set the cookie expiry
+        });
         const frontEndHost = process.env.FRONTEND_HOST || 'http://localhost:3000';
         res.redirect(`${frontEndHost}/home`);
       } else {
@@ -34,5 +38,20 @@ export class AuthController {
       console.error(error);
       return res.status(500).json({ message: 'Error retrieving the Google account' });
     }
+  }
+
+  public async getUserInfo(req: Request, res: Response): Promise<any> {
+    res.json({ user: req.user });
+    // try {
+    //   const accessToken = req.cookies['access_token'];
+    //   if (!accessToken) {
+    //     return res.status(401).json({ message: 'No access token provided' });
+    //   }
+    //   const userInfo = await this.authService.getUserInfo(accessToken);
+    //   res.json(userInfo);
+    // }catch(err) {
+    //   console.error('Error getting user info:', err);
+    //   res.status(500).json({ message: 'Error retrieving user info' });
+    // }
   }
 }
