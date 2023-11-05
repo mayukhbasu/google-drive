@@ -1,37 +1,34 @@
-# Step 1: Choose the base image
-FROM node:16 as builder
+# Use a Node base image
+FROM node:16-alpine as build
 
-# Set the working directory in the Docker image
+# Create app directory
 WORKDIR /usr/src/app
 
-# Copy package.json and package-lock.json to the working directory
+# Install app dependencies
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
 COPY package*.json ./
 
-# Install dependencies
+# Install all dependencies in the container
 RUN npm install
 
-# Copy the rest of the code to the working directory
+# Bundle app source inside the Docker image
 COPY . .
 
-# Build the TypeScript code
+# Build the project
 RUN npm run build
 
-# Step 2: Set up the production image
-FROM node:16-slim
+# Start a new build stage
+FROM node:16-alpine
 
+# Set working directory
 WORKDIR /usr/src/app
 
-# Copy package.json and package-lock.json
-COPY package*.json ./
+# Copy over the built artifacts from the previous stage
+COPY --from=build /usr/src/app/dist ./dist
+COPY --from=build /usr/src/app/node_modules ./node_modules
 
-# Install only production dependencies
-RUN npm install --only=production
-
-# Copy the built code from the builder stage
-COPY --from=builder /usr/src/app/dist ./dist
-
-# Expose the port the app runs on
+# Your app binds to port 3000 so you'll use the EXPOSE instruction to have it mapped by the docker daemon
 EXPOSE 3000
 
-# Set the command to start the node server
+# Define the command to run your app using CMD which defines your runtime
 CMD ["node", "dist/index.js"]
