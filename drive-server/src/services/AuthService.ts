@@ -1,6 +1,5 @@
 import { OAuth2Client,  } from 'google-auth-library';
 import { google, oauth2_v2 } from 'googleapis';
-import jwt from 'jsonwebtoken';
 
 
 export class AuthService {
