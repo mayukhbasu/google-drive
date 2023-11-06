@@ -1,15 +1,23 @@
-import * as dotenv from 'dotenv';
-dotenv.config();
+import dbConfig from './config/db.config';
 
 
 import express from 'express';
 import cookieParser from 'cookie-parser';
+import mongoose from 'mongoose';
+
 
 import authRoutes from './routes/authRoutes';
 import homeRoutes from './routes/homeRoutes';
 
 
 const app = express();
+
+
+mongoose.connect(dbConfig.uri)
+.then(() => console.log('Connected to MongoDB'))
+.catch((error: any) => console.error('MongoDB connection error:', error));
+
+
 app.use(cookieParser());
 const PORT = process.env.PORT || 5000;
 
