@@ -9,4 +9,4 @@
 .DS_Store
 *.log
 .env
-test.txt
+service-account.json
