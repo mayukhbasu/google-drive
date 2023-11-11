@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { FileService } from "../services/FileService";
 import multer from 'multer';
 import fs from 'fs';
+import File,{ IFile } from "../models/file-model";
 
 
 const upload = multer({dest: 'uploads/'})
@@ -20,11 +21,11 @@ export class FileController {
     }
 
     try {
-      console.log(req.file)
-      // const fileName = req.file.originalname;
-      // const signedUrl = await this.fileService.generateUploadSignedUrl(fileName);
-      // await this.fileService.uploadFileToGCS(signedUrl, req.file.path);
-      // fs.unlinkSync(req.file.path);
+      const fileName = req.file.originalname;
+      const signedUrl = await this.fileService.generateUploadSignedUrl(fileName);
+      await this.fileService.uploadFileToGCS(signedUrl, req.file.path);
+      await this.saveFileMetadata(req);
+      fs.unlinkSync(req.file.path);
       res.status(200).send('File uploaded successfully');
     } catch(error) {
       if (req.file && fs.existsSync(req.file.path)) {
@@ -34,5 +35,18 @@ export class FileController {
     }
   }
 
-
+  private async saveFileMetadata(req: Request) : Promise<void> {
+    console.log(req.file)
+    try {
+      const fileData = new File({
+        originalname: req.file?.originalname,
+        filename: req.file?.filename,
+        size: req.file?.size
+      });
+      await fileData.save();
+    } catch(error) {
+        console.error('Error saving file metadata:', error);
+        throw error; // Rethrow the error to be caught by the caller
+    } 
+  }
 }

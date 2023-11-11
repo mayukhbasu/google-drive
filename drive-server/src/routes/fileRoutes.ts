@@ -2,7 +2,7 @@ import express from 'express';
 import { authMiddleware } from '../middlewares/authMiddleware';
 import { FileController } from '../controllers/FileController';
 import multer from 'multer';
-import { fileUploadMiddleware } from '../middlewares/fileuploadMiddleware';
+import { fileUploadMiddleware } from '../middlewares/fileUploadMiddleware';
 
 
 const router = express.Router();

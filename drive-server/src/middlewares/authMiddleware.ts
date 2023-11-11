@@ -2,9 +2,6 @@ import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import { AuthService } from '../services/AuthService';
 
-interface JwtPayload {
-  email: string;
-}
 
 export const authMiddleware = async (req: Request, res: Response, next: NextFunction) => {
   try {
