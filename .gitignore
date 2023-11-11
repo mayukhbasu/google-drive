@@ -2,8 +2,11 @@
 /drive-server/node_modules/
 /drive-client/node_modules/
 /drive-server/dist/
+/drive-server/uploads
+
 
 # Other files and folders to ignore
 .DS_Store
 *.log
 .env
+test.txt
