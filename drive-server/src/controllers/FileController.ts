@@ -20,10 +20,11 @@ export class FileController {
     }
 
     try {
-      const fileName = req.file.originalname;
-      const signedUrl = await this.fileService.generateUploadSignedUrl(fileName);
-      await this.fileService.uploadFileToGCS(signedUrl, req.file.path);
-      fs.unlinkSync(req.file.path);
+      console.log(req.file)
+      // const fileName = req.file.originalname;
+      // const signedUrl = await this.fileService.generateUploadSignedUrl(fileName);
+      // await this.fileService.uploadFileToGCS(signedUrl, req.file.path);
+      // fs.unlinkSync(req.file.path);
       res.status(200).send('File uploaded successfully');
     } catch(error) {
       if (req.file && fs.existsSync(req.file.path)) {
