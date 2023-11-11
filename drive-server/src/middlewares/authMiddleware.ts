@@ -1,11 +1,11 @@
 import { Request, Response, NextFunction } from 'express';
-import jwt from 'jsonwebtoken';
 import { AuthService } from '../services/AuthService';
 
 
 export const authMiddleware = async (req: Request, res: Response, next: NextFunction) => {
   try {
       const accessToken = req.cookies['access_token'];
+      console.log(accessToken);
       if (!accessToken) {
         return res.status(401).json({ message: 'No access token provided' });
       }

@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 import { authMiddleware } from '../middlewares/authMiddleware';
 import { FileController } from '../controllers/FileController';
 import multer from 'multer';
@@ -10,7 +10,7 @@ const bucketName = 'kahn';
 const fileController = new FileController(bucketName);
 
 const upload = multer({dest: 'uploads/'})
-
-router.post('/upload', fileUploadMiddleware, (req, res) => fileController.uploadFile(req, res));
+const middlewares = [authMiddleware, fileUploadMiddleware]
+router.post('/upload', middlewares, (req: Request, res: Response) => fileController.uploadFile(req, res));
 
 export default router;
