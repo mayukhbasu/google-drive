@@ -9,11 +9,12 @@ export interface IFile extends Document {
   filename: string;
   path: string;
   size: number;
+  uploaderName: string;
   uploadDate: Date;
 }
 
 const FileSchema: Schema = new Schema({
-  fieldname: { type: String, required: false },
+  fieldname: { type: String, required: false, unique: true},
   originalname: { type: String, required: true },
   encoding: { type: String, required: false },
   mimetype: { type: String, required: false },
@@ -21,6 +22,7 @@ const FileSchema: Schema = new Schema({
   filename: { type: String, required: true },
   path: { type: String, required: false },
   size: { type: Number, required: true },
+  uploaderName: {type: String, required: false},
   uploadDate: { type: Date, default: Date.now }
 });
 

@@ -36,12 +36,12 @@ export class FileController {
   }
 
   private async saveFileMetadata(req: Request) : Promise<void> {
-    console.log(req.file)
     try {
       const fileData = new File({
         originalname: req.file?.originalname,
         filename: req.file?.filename,
-        size: req.file?.size
+        size: req.file?.size,
+        uploaderName: req.user.name
       });
       await fileData.save();
     } catch(error) {

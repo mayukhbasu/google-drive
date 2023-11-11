@@ -10,3 +10,5 @@
 *.log
 .env
 service-account.json
+details.json
+readme.md
