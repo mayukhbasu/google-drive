@@ -1,11 +1,16 @@
 import express from 'express';
 import { authMiddleware } from '../middlewares/authMiddleware';
 import { FileController } from '../controllers/FileController';
+import multer from 'multer';
+import { fileUploadMiddleware } from '../middlewares/fileuploadMiddleware';
+
 
 const router = express.Router();
 const bucketName = 'kahn';
 const fileController = new FileController(bucketName);
 
-router.post('/upload',  (req, res) => fileController.uploadFile(req, res));
+const upload = multer({dest: 'uploads/'})
+
+router.post('/upload', fileUploadMiddleware, (req, res) => fileController.uploadFile(req, res));
 
 export default router;

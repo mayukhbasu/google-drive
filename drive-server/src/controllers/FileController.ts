@@ -15,30 +15,22 @@ export class FileController {
   }
 
   public async uploadFile(req: Request, res: Response) {
-    
-    const singleUpload = upload.single('file');
-    console.log(req);
-    singleUpload(req, res, async (err) => {
-      if(err) {
-        return res.status(422).send({ error: 'File upload error' });
-      }
-      if(!req.file) {
-        return res.status(400).send({ error: 'No file provided' });
-      }
-      try {
-        const fileName = req.file.originalname;
-        const signedUrl = await this.fileService.generateUploadSignedUrl(fileName);
-        await this.fileService.uploadFileToGCS(signedUrl, req.file.path);
-        fs.unlinkSync(req.file.path);
-        res.status(200).send('File uploaded successfully');
+    if(!req.file) {
+      return res.status(400).send({ error: 'No file provided' });
+    }
 
-      } catch (error) {
-        if(req.file && fs.existsSync(req.file.path)) {
-          fs.unlinkSync(req.file.path);
-        }
-        res.status(500).json({error: 'Error in uploading file'})
+    try {
+      const fileName = req.file.originalname;
+      const signedUrl = await this.fileService.generateUploadSignedUrl(fileName);
+      await this.fileService.uploadFileToGCS(signedUrl, req.file.path);
+      fs.unlinkSync(req.file.path);
+      res.status(200).send('File uploaded successfully');
+    } catch(error) {
+      if (req.file && fs.existsSync(req.file.path)) {
+        fs.unlinkSync(req.file.path);
       }
-    })
+      res.status(500).json({ error: 'Error in uploading file' });
+    }
   }
 
 

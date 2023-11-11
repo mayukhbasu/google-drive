@@ -8,6 +8,7 @@ import mongoose from 'mongoose';
 
 import authRoutes from './routes/authRoutes';
 import homeRoutes from './routes/homeRoutes';
+import fileRoutes from './routes/fileRoutes';
 
 
 const app = express();
@@ -29,7 +30,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Use the authRoutes with the /auth prefix
 app.use('/auth', authRoutes);
-
+app.use('/file', fileRoutes)
 app.use('/api/home', homeRoutes);
 
 app.listen(PORT, () => {
