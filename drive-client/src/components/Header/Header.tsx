@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './Header.module.css';
 import UserInfo from '../UserInfo/UserInfo';
+import logo from '../../assets/logo.png';
 
 interface HeaderProps {
   onLogout: () => void;
@@ -11,7 +12,7 @@ const Header: React.FC<HeaderProps> = ({ onLogout }) => {
     <header className={styles.header}>
       <div className={styles.logo}>
         {/* Replace with your logo */}
-       
+        <img src={logo} alt="Logo" />
         <h1>Drive</h1>
       </div>
 

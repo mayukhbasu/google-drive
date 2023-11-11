@@ -2,6 +2,7 @@ import React from 'react';
 import Header from '../../components/Header/Header';
 import { useDispatch } from 'react-redux';
 import { logoutUser } from '../../actions/logoutActions';
+import CreateButton from '../../components/CreateButton/CreateButton';
 
 const HomePage = () => {
 
@@ -12,7 +13,7 @@ const HomePage = () => {
   return (
     <div>
       <Header onLogout={handleLogout}/>
-      This is home page
+      <CreateButton/>
     </div>
   );
 };
