@@ -16,6 +16,7 @@ export class AuthController {
   public async getGoogleAccountFromCode(req: Request, res: Response) {
     try {
       const { code } = req.query;
+      console.log(code);
       const tokens = await this.authService.getTokensFromCode(code as string);
       
       const userInfo = await this.authService.getUserInfo(tokens.access_token);

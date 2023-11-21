@@ -1,8 +1,12 @@
 import './CreateButton.css';
 
-const CreateButton = () => {
+interface CreateButtonProps {
+  onClick: () => void;
+}
+
+const CreateButton: React.FC<CreateButtonProps> = ({onClick}) => {
   return (
-    <button className="bottom-right-button">+</button>
+    <button className="bottom-right-button" onClick={onClick}>+</button>
   );
 };
 

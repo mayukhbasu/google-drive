@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from '../../components/Header/Header';
 import { useDispatch } from 'react-redux';
 import { logoutUser } from '../../actions/logoutActions';
 import CreateButton from '../../components/CreateButton/CreateButton';
+import FileManagementModal from '../../components/FileManagementModal/FileManagementModal';
 
 const HomePage = () => {
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const toggleModal = () => setIsModalOpen(!isModalOpen);
 
   const dispatch = useDispatch();
   const handleLogout = () => {
@@ -13,7 +18,8 @@ const HomePage = () => {
   return (
     <div>
       <Header onLogout={handleLogout}/>
-      <CreateButton/>
+      <FileManagementModal isOpen={isModalOpen} onClose={toggleModal}/>
+      <CreateButton onClick={toggleModal}/>
     </div>
   );
 };
