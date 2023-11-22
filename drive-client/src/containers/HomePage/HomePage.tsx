@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import Header from '../../components/Header/Header';
 import { useDispatch } from 'react-redux';
 import { logoutUser } from '../../actions/logoutActions';
-import CreateButton from '../../components/CreateButton/CreateButton';
-import FileManagementModal from '../../components/FileManagementModal/FileManagementModal';
+import CreateButton from '../../components/Buttons/CreateButton/CreateButton';
+import FileManagementModal from '../../components/Modals/FileManagementModal/FileManagementModal';
 
 const HomePage = () => {
 

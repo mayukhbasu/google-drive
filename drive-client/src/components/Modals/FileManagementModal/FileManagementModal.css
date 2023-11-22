@@ -16,6 +16,7 @@
   padding: 25px;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  animation: slideDown 0.5s ease-out; 
   width: 400px; /* Adjust as needed */
 }
 
@@ -52,3 +53,15 @@
 .modal-options button:hover {
   background-color: #0056b3;
 }
+
+@keyframes slideDown {
+  from {
+      transform: translateY(-100%);
+      opacity: 0;
+  }
+  to {
+      transform: translateY(0);
+      opacity: 1;
+  }
+}
+
