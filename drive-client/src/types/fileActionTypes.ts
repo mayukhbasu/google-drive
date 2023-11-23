@@ -1,3 +1,5 @@
+import { AxiosError } from "axios";
+
 export const FILE_UPLOAD_REQUEST = 'FILE_UPLOAD_REQUEST';
 export const FILE_UPLOAD_SUCCESS = 'FILE_UPLOAD_SUCCESS';
 export const FILE_UPLOAD_ERROR = 'FILE_UPLOAD_ERROR';
@@ -15,6 +17,7 @@ export interface FileUploadSuccessResponse {
 
 export interface FileUploadFailureResponse {
   error: string;
+  response?: any; 
 }
 
 interface FileUploadRequest {

@@ -28,12 +28,13 @@ const HomePage = () => {
     setIsLoading(true);
     dispatch(fileUploadToGCS(file) as any).then((response: FileUploadSuccessResponse) => {
       if(response.message) {
-        setToaster({ show: true, message: 'File uploaded successfully!' });
+        setToaster({ show: true, message: response.message });
         setType('success');
         setIsLoading(false)
       }
     }).catch((error: FileUploadFailureResponse) => {
-      setToaster({ show: true, message: 'Upload failed!' });
+      console.log(error)
+      setToaster({ show: true, message: error.response.data.error });
       setType('error');
       setIsLoading(false)
     }) 
