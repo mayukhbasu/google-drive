@@ -1,8 +1,7 @@
 .toaster {
   position: fixed;
-  bottom: 20px;
   right: 20px;
-  background-color: #007bff; /* Example: Blue background for standard alert */
+  top: 70px;
   color: white;
   padding: 15px 20px;
   border-radius: 8px;
@@ -37,3 +36,12 @@
 .toaster-close-button:hover {
   opacity: 0.7;
 }
+.toaster.success {
+  background-color: #28a745; /* Green background for success */
+}
+
+.toaster.error {
+  background-color: #dc3545; /* Red background for error */
+}
+
+

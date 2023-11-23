@@ -12,7 +12,7 @@ const HomePage = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [toaster, setToaster] = useState({show: false, message: ''})
-
+  const [type, setType] = useState<'success' | 'error'>('success');
   const toggleModal = () => setIsModalOpen(!isModalOpen);
 
   const dispatch = useDispatch();
@@ -24,9 +24,11 @@ const HomePage = () => {
     dispatch(fileUploadToGCS(file) as any).then((response: FileUploadSuccessResponse) => {
       if(response.message) {
         setToaster({ show: true, message: 'File uploaded successfully!' });
+        setType('success');
       }
     }).catch((error: FileUploadFailureResponse) => {
       setToaster({ show: true, message: 'Upload failed!' });
+      setType('error');
     }) 
     
   };
@@ -39,7 +41,7 @@ const HomePage = () => {
       <Header onLogout={handleLogout}/>
       <FileManagementModal handleFileUpload={handleFileUpload} isOpen={isModalOpen} onClose={toggleModal}/>
       <CreateButton onClick={toggleModal}/>
-      <Toaster message={toaster.message} onClose={closeToaster} show={toaster.show}/>
+      <Toaster message={toaster.message} onClose={closeToaster} type={type} show={toaster.show}/>
     </div>
   );
 };
