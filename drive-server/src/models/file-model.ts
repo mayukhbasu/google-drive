@@ -1,7 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 
 export interface IFile extends Document {
-  fieldName: string;
   originalname: string;
   encoding: string;
   mimetype: string;
@@ -14,8 +13,7 @@ export interface IFile extends Document {
 }
 
 const FileSchema: Schema = new Schema({
-  fieldname: { type: String, required: false, unique: true},
-  originalname: { type: String, required: true },
+  originalname: { type: String, required: true, unique: true },
   encoding: { type: String, required: false },
   mimetype: { type: String, required: false },
   destination: { type: String, required: false },

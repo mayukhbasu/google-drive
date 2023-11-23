@@ -20,7 +20,8 @@ const FileManagementModal: React.FC<ModalProps> = ({isOpen, onClose, handleFileU
     if(!files) return;
     const fileName = files[0].name;
     console.log(fileName);
-    handleFileUpload(files[0])
+    handleFileUpload(files[0]);
+    onClose();
   }
 
   useEffect(() => {

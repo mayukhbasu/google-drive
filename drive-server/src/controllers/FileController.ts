@@ -36,6 +36,7 @@ export class FileController {
   }
 
   private async saveFileMetadata(req: Request) : Promise<void> {
+    console.log(req.user)
     try {
       const fileData = new File({
         originalname: req.file?.originalname,
