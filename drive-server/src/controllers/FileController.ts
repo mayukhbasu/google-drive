@@ -26,7 +26,7 @@ export class FileController {
       await this.fileService.uploadFileToGCS(signedUrl, req.file.path);
       await this.saveFileMetadata(req);
       fs.unlinkSync(req.file.path);
-      res.status(200).send('File uploaded successfully');
+      res.status(200).send({message: 'File uploaded successfully'});
     } catch(error) {
       if (req.file && fs.existsSync(req.file.path)) {
         fs.unlinkSync(req.file.path);

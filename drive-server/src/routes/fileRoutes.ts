@@ -11,6 +11,6 @@ const fileController = new FileController(bucketName);
 
 const upload = multer({dest: 'uploads/'})
 const middlewares = [authMiddleware, fileUploadMiddleware]
-router.post('/upload', middlewares, (req: Request, res: Response) => fileController.uploadFile(req, res));
+router.post('/upload', fileUploadMiddleware, (req: Request, res: Response) => fileController.uploadFile(req, res));
 
 export default router;

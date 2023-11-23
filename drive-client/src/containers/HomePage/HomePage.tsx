@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { logoutUser } from '../../actions/logoutActions';
 import CreateButton from '../../components/Buttons/CreateButton/CreateButton';
 import FileManagementModal from '../../components/Modals/FileManagementModal/FileManagementModal';
+import { fileUploadToGCS } from '../../actions/fileActions';
 
 const HomePage = () => {
 
@@ -15,10 +16,14 @@ const HomePage = () => {
   const handleLogout = () => {
     dispatch(logoutUser() as any)
   }
+
+  const handleFileUpload = (file: File) => {
+    dispatch(fileUploadToGCS(file) as any)
+  }
   return (
     <div>
       <Header onLogout={handleLogout}/>
-      <FileManagementModal isOpen={isModalOpen} onClose={toggleModal}/>
+      <FileManagementModal handleFileUpload={handleFileUpload} isOpen={isModalOpen} onClose={toggleModal}/>
       <CreateButton onClick={toggleModal}/>
     </div>
   );
