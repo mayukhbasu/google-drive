@@ -19,7 +19,7 @@ const FileSchema: Schema = new Schema({
   destination: { type: String, required: false },
   filename: { type: String, required: true },
   path: { type: String, required: false },
-  size: { type: Number, required: true },
+  size: { type: Number, required: true},
   uploaderName: {type: String, required: false},
   uploadDate: { type: Date, default: Date.now }
 });

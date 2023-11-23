@@ -22,19 +22,25 @@ const fileUploaderror = (fileUploadError: FileUploadFailureResponse) : FileActio
   }
 }
 
+
 export const fileUploadToGCS = (file: File) => {
-  return (dispatch: Dispatch) => {
+  return (dispatch: Dispatch): Promise<any> => {
     dispatch(fileUploadRequest());
     const formData = new FormData();
     formData.append('file', file);
-    axios.post('/file/upload', formData, {
+
+    return axios.post('/file/upload', formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
-    }).then(response => {
-      dispatch(fileUploadSuccess(response.data));
-    }).catch(response => {
-      fileUploaderror(response.data);
     })
-  }
-}
+    .then(response => {
+      dispatch(fileUploadSuccess(response.data));
+      return Promise.resolve(response.data); // Ensure a Promise is returned
+    })
+    .catch(error => {
+      dispatch(fileUploaderror(error));
+      return Promise.reject(error); // Propagate the error as a rejected Promise
+    });
+  };
+};
